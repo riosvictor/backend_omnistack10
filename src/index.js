@@ -11,14 +11,16 @@ const server = http.Server(app);
 
 setupWebsocket(server);
 
-mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-oqmyl.mongodb.net/week10?retryWrites=true&w=majority', {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGO_URL, 
+    {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true
+    }
+);
 
 app.use(cors());
 app.use(express.json());
 app.use(routes);
 
 
-server.listen(3333);
+server.listen(process.env.PORT || 3333);
